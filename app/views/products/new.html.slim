@@ -1,0 +1,24 @@
+h1 Adding a product
+
+= form_for :product, url: authenticated_root_index_path do |f|
+  = f.label      :name
+  br/
+  = f.text_field :name
+  br/
+  = f.label      :shop
+  br/
+  = f.text_field :shop
+  br/
+  = f.label      :category
+  br/
+  = f.text_field :category
+  br/
+  = f.label      :price
+  br/
+  = f.text_field :price
+  br/
+  = f.label      :quantity
+  br/
+  = f.text_field :quantity
+  br/
+  = f.submit

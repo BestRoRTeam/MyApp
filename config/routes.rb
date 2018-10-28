@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     authenticated :user do
       root 'pages#index', as: :authenticated_root
+      resources :products, except: [:edit, :show], as: :authenticated_root
     end
 
     unauthenticated do
