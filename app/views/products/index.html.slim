@@ -1,0 +1,19 @@
+h1 Your products
+
+- total = 0
+- @products.each do |product|
+  - total += product.price * product.quantity
+
+p
+ = "Money spent: " + total.to_s
+
+table
+  thead
+    tr
+      - @products.column_names[1..-3].each do |x|
+        th = x.capitalize.gsub('_', ' ')
+  tbody
+    - @products.reverse.each do |product|
+      tr
+      - product.attributes.values[1..-3].each do |x|
+        td = x

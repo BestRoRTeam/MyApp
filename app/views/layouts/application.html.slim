@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title PersonalFinances
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+  body
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      = link_to("PersonalFinances", authenticated_root_url, :class => "navbar-brand")
+      button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button" 
+        span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+        ul.navbar-nav.ml-auto
+          - if current_user.nil?
+            li.nav-item
+              = link_to("Log in", new_user_session_path, :class => "nav-link")
+          - else
+            li.nav-item
+            = link_to("Add product", new_authenticated_root_path, :class => "nav-link")
+            li.nav-item
+              = link_to("Products", authenticated_root_index_path, :class => "nav-link")
+            li.nav-item
+              = link_to("Log out", destroy_user_session_path, method: :delete, :class => "nav-link")
+    = render 'layouts/alerts'
+    = yield
