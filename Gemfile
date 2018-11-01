@@ -9,10 +9,10 @@ ruby '2.5.1'
 gem 'rails', '~> 5.2.1'
 
 # Custom gems
-gem 'devise'
-gem 'slim-rails'
 gem 'bootstrap'
+gem 'devise'
 gem 'jquery-rails'
+gem 'slim-rails'
 # -----------
 
 # Use postgresql as the database for Active Record

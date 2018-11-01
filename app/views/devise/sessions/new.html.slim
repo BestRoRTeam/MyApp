@@ -3,13 +3,13 @@
     = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin"}) do |f|
       h2.form-signin-heading Log in
       = f.label :login, 'Login' 
-      br/
+      br
       = f.text_field :login, autofocus: true, class: 'form-control', placeholder: 'Login'
 
       = f.label :password, 'Password'
-      br/
+      br
       = f.password_field :password, autocomplete: "current-password", class: 'form-control', placeholder: 'Password'
-      br/
+      br
       - if devise_mapping.rememberable?
         label
           = f.check_box :remember_me, label: false
