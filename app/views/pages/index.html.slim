@@ -1,4 +1,24 @@
 
-h1
-  = "Welcome " + current_user.username + ", have a nice day!"
+.container.text-center.pt-4
+  h1 = "Welcome " + current_user.username + ", have a nice day!"
+  br/
+  h2 Features
+  .row
+    .col-12.col-md-4
+      =link_to new_product_path do
+        = image_tag  'shopping-icon.png'
+      h3 Shopping forms
+      p Fill in the form to remember every purchase!
+    .col-12.col-md-4 
+      =link_to products_path do
+        = image_tag  'shopping-icon.png'
+      h3 Statistics
+      p Check out the statistics of your last shopping!
+    .col-12.col-md-4
+      =link_to products_path do
+        = image_tag  'shopping-icon.png'
+      h3 Shopping lists
+      p Create your own shopping list that you never forget anything!
+
+
 

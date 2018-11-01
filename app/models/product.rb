@@ -5,5 +5,5 @@ class Product < ApplicationRecord
   validates :shop, length: { in: 2..100 }
   validates :category, presence: true
   validates :price, presence: true
-  validates :quantity, presence: true
+  validates :quantity, presence: true, numericality: { other_than: 0 }
 end
