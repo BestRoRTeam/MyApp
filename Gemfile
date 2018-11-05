@@ -12,6 +12,7 @@ gem 'rails', '~> 5.2.1'
 gem 'bootstrap'
 gem 'devise'
 gem 'jquery-rails'
+gem 'rubocop', '~> 0.60.0', require: false
 gem 'slim-rails'
 # -----------
 
