@@ -1,4 +1,6 @@
 
+p = @category
+
 .card-body.bg-light 
     h1 Adding a product
     form
@@ -11,17 +13,19 @@
             = f.label :shop,'Shop'
             br
             = f.text_field :shop, class: 'form-control', placeholder: 'Shop'
-        form-group
+        .form-group
             = f.label :category,'Category'
             br
-            = f.text_field :category, class: 'form-control', placeholder: 'Category'
-        form-group
+            = select_tag :category, options_for_select(@choices, @choice), class: 'form-control'
+        .form-group
             = f.label :price,'Price'
             br
             = f.text_field :price, class: 'form-control', placeholder: 'Price'
-        form-group
+        .form-group
             = f.label :quantity,'Quantity'
             br
             = f.text_field :quantity, class: 'form-control', placeholder: 'Quantity'
         br
         = f.submit "Save Product", :style =>"width: 300px", class: 'btn btn-lg btn-primary btn-block'
+    br
+    = link_to "+Add category", categories_path, :style =>"width: 300px", class: 'btn btn-lg btn-secondary btn-block'

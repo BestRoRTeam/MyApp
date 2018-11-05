@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     authenticated :user do
       root 'pages#index', as: :authenticated_root
       resources :products
+      resources :categories
     end
 
     unauthenticated do

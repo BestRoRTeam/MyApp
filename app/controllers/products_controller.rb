@@ -8,10 +8,17 @@ class ProductsController < ApplicationController
     @products = @products.where('created_at > ?', date_selector(@period)) if @period != 'All'
   end
 
-  def new; end
+  def new
+    @choices = []
+    Category.where(user_id: current_user.id).each do |c|
+      @choices.push(c.name)
+    end
+    @choice = @choices.first
+  end
 
   def create
     @product = Product.new(product_params)
+    @product.category = params[:category]
     @product.user_id = current_user.id
 
     if @product.save
@@ -28,6 +35,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    @choice = @choices.first
     @product = Product.where(user_id: current_user.id).find(params[:id])
     if @product.update(product_params)
       flash[:notice] = 'Product updated'
@@ -39,6 +47,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    @choice = @choices.first
     @product = Product.where(user_id: current_user.id).find(params[:id])
     @product.destroy
     redirect_to products_path
