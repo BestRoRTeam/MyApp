@@ -1,32 +1,22 @@
-.container
-  .col
-    .card-body.bg-light 
-        h1 Categories
-        form
-        = form_for :category, url: categories_path do |f|
-          br
-          .form-group
-              = f.text_field :name, class: 'form-control', placeholder: 'Name'
-          br
-          = f.submit "Add Category", class: 'btn btn-lg btn-primary btn-block'
-
-    .card-body.bg-light 
-      .row
-        .col-md-3
-        #table-responsive.col-6
-          table.table.table-light
-            thead
-              tr
-                th Name
-                th Options
-            tbody
-            - @categories.reverse.each do |category|
-              tr
-                td = category.name
-                td
-                  =link_to "Edit", edit_category_path(category), 
-                                    :style =>"margin: 10px",
-                                    class: 'btn btn-outline-info'
-                  =link_to "Delete", category_path(category),
-                                      method: :delete, data:{confirm: 'Are you sure?'},
-                                      :style =>"margin: 10px", class: 'btn btn-outline-danger'
+  render = render partial: "form"
+  br
+  .card-body.bg-light 
+    .row
+      .col-md-3
+      #table-responsive.col-6
+        table.table.table-light
+          thead
+            tr
+              th Name
+              th Options
+          tbody
+          - @categories.reverse.each do |category|
+            tr
+              td = category.name
+              td
+                =link_to "Edit", edit_category_path(category), 
+                                  :style =>"margin: 10px",
+                                  class: 'btn btn-outline-info'
+                =link_to "Delete", category_path(category),
+                                    method: :delete, data:{confirm: 'Are you sure?'},
+                                    :style =>"margin: 10px", class: 'btn btn-outline-danger'

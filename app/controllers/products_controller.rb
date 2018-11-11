@@ -1,11 +1,11 @@
 # frozen_string_literal: true
+require_relative '../providers/product_provider.rb'
 
 class ProductsController < ApplicationController
   def index
-    @dates = %w[Week Month Year All]
-    @period = (params[:period] || @dates[0])
+    @period = (params[:period] || ProductProvider.dates[0])
     @products = Product.where(user_id: current_user.id).order('created_at')
-    @products = @products.where('created_at > ?', date_selector(@period)) if @period != 'All'
+    @products = @products.where('created_at > ?', ProductProvider.date_selector(@period)) if @period != 'All'
   end
 
   def new
@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
       @choices.push(c.name)
     end
     @choice = @choices.first
+    
   end
 
   def create
@@ -32,10 +33,16 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.where(user_id: current_user.id).find(params[:id])
+    @choices = []
+    Category.where(user_id: current_user.id).each do |c|
+      @choices.push(c.name)
+    end
+    @choice = @product.category
   end
 
   def update
     @product = Product.where(user_id: current_user.id).find(params[:id])
+    @product.category = params[:category]
     if @product.update(product_params)
       flash[:notice] = 'Product updated'
       redirect_to action: 'index'
@@ -55,15 +62,5 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :shop, :category, :price, :quantity)
-  end
-
-  def date_selector(choice)
-    if choice == 'Week'
-      1.week.ago
-    elsif choice == 'Month'
-      1.month.ago
-    elsif choice == 'Year'
-      12.months.ago
-    end
   end
 end

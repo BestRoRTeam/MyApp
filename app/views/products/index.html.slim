@@ -13,7 +13,7 @@
       
       = form_for :period, url: products_path, method: 'get' do
         = label :period,'Select desired period'
-        = select_tag :period, options_for_select(@dates, @period),
+        = select_tag :period, options_for_select(ProductProvider.dates, @period),
                               class: 'form-control',
                               :onchange => 'this.form.submit();'
       br
