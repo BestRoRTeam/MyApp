@@ -1,0 +1,22 @@
+.container
+  .col
+    .card-body.bg-light 
+      -if !@categories
+          h1 Edit category
+          form
+          = form_for @category do |f|
+            .form-group
+                = f.label :name,'Name'
+                br
+                = f.text_field :name, class: 'form-control', placeholder: 'Name'
+            br
+            = f.submit "Save Category", :style =>"width: 400px", class: 'btn btn-lg btn-primary btn-block'
+      -else
+          h1 Categories
+          form
+          = form_for :category, url: categories_path do |f|
+            br
+            .form-group
+                = f.text_field :name, class: 'form-control', placeholder: 'Name'
+            br
+            = f.submit "Add Category", class: 'btn btn-lg btn-primary btn-block'
