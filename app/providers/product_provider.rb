@@ -3,6 +3,7 @@ class ProductProvider
     def dates
       %w[Week Month Year All]
     end
+
     def date_selector(choice)
       if choice == 'Week'
         1.week.ago

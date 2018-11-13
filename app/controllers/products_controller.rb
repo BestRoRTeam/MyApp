@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative '../providers/product_provider.rb'
 
 class ProductsController < ApplicationController
@@ -8,13 +9,17 @@ class ProductsController < ApplicationController
     @products = @products.where('created_at > ?', ProductProvider.date_selector(@period)) if @period != 'All'
   end
 
+  def statistics
+    @categories = Category.where(user_id: current_user.id)
+    @products = Product.where(user_id: current_user.id).order('created_at')
+  end
+
   def new
     @choices = []
     Category.where(user_id: current_user.id).each do |c|
       @choices.push(c.name)
     end
     @choice = @choices.first
-    
   end
 
   def create

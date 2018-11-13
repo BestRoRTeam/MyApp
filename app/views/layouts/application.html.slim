@@ -26,6 +26,8 @@ html
             li.nav-item
               = link_to("Products", products_path, :class => "nav-link")
             li.nav-item
+              = link_to("Statistics", products_statistics_path, :class => "nav-link")
+            li.nav-item
               = link_to("Log out", destroy_user_session_path, method: :delete, :class => "nav-link")
     = render 'layouts/alerts'
     = yield

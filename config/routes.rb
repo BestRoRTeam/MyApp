@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     authenticated :user do
       root 'pages#index', as: :authenticated_root
+      get 'products/statistics' => 'products#statistics'
       resources :products
       resources :categories
     end
