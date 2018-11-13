@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Text:
+  = @tip_of_the_day.text
+
+=> link_to 'Edit', edit_tip_of_the_day_path(@tip_of_the_day)
+'|
+=< link_to 'Back', tip_of_the_days_path

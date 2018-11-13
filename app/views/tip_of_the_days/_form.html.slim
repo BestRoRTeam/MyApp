@@ -1,0 +1,12 @@
+= form_for @tip_of_the_day do |f|
+  - if @tip_of_the_day.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@tip_of_the_day.errors.count, "error")} prohibited this tip_of_the_day from being saved:"
+      ul
+        - @tip_of_the_day.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :text
+    = f.text_area :text
+  .actions = f.submit
