@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative '../providers/product_provider.rb'
 
 class ProductsController < ApplicationController
@@ -14,7 +15,6 @@ class ProductsController < ApplicationController
       @choices.push(c.name)
     end
     @choice = @choices.first
-    
   end
 
   def create

@@ -9,12 +9,12 @@ ruby '2.5.1'
 gem 'rails', '~> 5.2.1'
 
 # Custom gems
+gem 'activeadmin'
 gem 'bootstrap'
 gem 'devise'
 gem 'jquery-rails'
 gem 'rubocop', '~> 0.60.0', require: false
 gem 'slim-rails'
-gem 'activeadmin'
 # -----------
 
 # Use postgresql as the database for Active Record
