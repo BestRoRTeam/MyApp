@@ -10,6 +10,16 @@
 
 .card-body.bg-light 
   .row
+    .col-md-2
+    #table-responsive.col-8
+      = form_for :period, url: products_statistics_path, method: 'get' do
+          #select_date
+            = label :period,'Select desired period'
+          = select_tag :period, options_for_select(ProductProvider.dates, @period),
+                                class: 'form-control',
+                                :onchange => 'this.form.submit();'
+      br
+      br
     #total
       = 'Total: ' + ("%.2f" % [total])
     #total_category

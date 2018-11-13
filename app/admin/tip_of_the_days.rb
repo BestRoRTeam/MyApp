@@ -1,3 +1,3 @@
 ActiveAdmin.register TipOfTheDay do
-permit_params :text
+  permit_params :text
 end
