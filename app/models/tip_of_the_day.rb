@@ -1,0 +1,2 @@
+class TipOfTheDay < ApplicationRecord
+end

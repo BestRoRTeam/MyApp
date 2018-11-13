@@ -1,0 +1,21 @@
+h1 Listing tip_of_the_days
+
+table
+  thead
+    tr
+      th Text
+      th
+      th
+      th
+
+  tbody
+    - @tip_of_the_days.each do |tip_of_the_day|
+      tr
+        td = tip_of_the_day.text
+        td = link_to 'Show', tip_of_the_day
+        td = link_to 'Edit', edit_tip_of_the_day_path(tip_of_the_day)
+        td = link_to 'Destroy', tip_of_the_day, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Tip of the day', new_tip_of_the_day_path
