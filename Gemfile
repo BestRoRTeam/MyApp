@@ -18,6 +18,8 @@ gem 'slim-rails'
 # -----------
 
 group :development, :test do
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'rspec-rails', '~> 3.8'
 end
 
