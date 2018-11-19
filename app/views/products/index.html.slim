@@ -1,15 +1,10 @@
-
-- total = 0
-- @products.each do |product|
-  - total += product.price * product.quantity
-
 .card-body.bg-light 
   .row
     .col-md-2
     #table-responsive.col-8
       h1 Your products
       p
-       = 'Money spent: ' + ("%.2f" % [total])
+       = 'Money spent: ' + ("%.2f" % [@products.total_price])
       
       = form_for :period, url: products_path, method: 'get' do
         = label :period,'Select desired period'
@@ -20,14 +15,14 @@
       table.table.table-light
         thead
           tr
-          - @products.column_names[1..-3].each do |x|
-            th = x.capitalize.gsub('_', ' ')
+          - @products.categories_names.each do |x|
+            th = x
           th Options
         tbody
         - @products.reverse.each do |product|
           tr
-          - product.attributes.values[1..-3].each do |x|
-            td = (x.kind_of?(Float) ? ("%.2f" % [x]) : x)
+          - product.values.each do |x|
+            td = x
           td
            =link_to "Edit", edit_product_path(product), 
                             :style =>"margin: 10px",
