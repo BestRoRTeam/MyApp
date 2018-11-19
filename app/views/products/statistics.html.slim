@@ -1,0 +1,23 @@
+= stylesheet_link_tag 'statistics'
+
+.card-body.bg-light 
+  .row
+    .col-md-2
+    #table-responsive.col-8
+      = form_for :period, url: products_statistics_path, method: 'get' do
+          #select_date
+            = label :period,'Select desired period'
+          = select_tag :period, options_for_select(ProductProvider.dates, @period),
+                                class: 'form-control',
+                                :onchange => 'this.form.submit();'
+      br
+      br
+    #total
+      = 'Total: ' + ("%.2f" % [@products.total_price])
+    #total_category
+      - @products.total_price_by_category.each do |key, value|
+        div
+          = key + ": "+("%.2f" % [value])
+
+= content_tag "div", "", id: 'categories', data: { categories: @categories }
+= content_tag "canvas", "", id: 'myChart', data: { products: @products }

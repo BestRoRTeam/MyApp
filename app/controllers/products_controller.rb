@@ -1,9 +1,17 @@
 # frozen_string_literal: true
+
 require_relative '../providers/product_provider.rb'
 
 class ProductsController < ApplicationController
   def index
     @period = (params[:period] || ProductProvider.dates[0])
+    @products = Product.where(user_id: current_user.id).order('created_at')
+    @products = @products.where('created_at > ?', ProductProvider.date_selector(@period)) if @period != 'All'
+  end
+
+  def statistics
+    @period = (params[:period] || ProductProvider.dates[0])
+    @categories = Category.where(user_id: current_user.id)
     @products = Product.where(user_id: current_user.id).order('created_at')
     @products = @products.where('created_at > ?', ProductProvider.date_selector(@period)) if @period != 'All'
   end
@@ -14,7 +22,6 @@ class ProductsController < ApplicationController
       @choices.push(c.name)
     end
     @choice = @choices.first
-    
   end
 
   def create

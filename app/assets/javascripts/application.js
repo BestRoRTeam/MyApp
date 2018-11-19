@@ -12,7 +12,9 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require_tree .
 //= require jquery3
+//= require jquery_ujs
+//= require_tree .
 //= require popper
 //= require bootstrap
+//= require Chart.min
