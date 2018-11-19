@@ -14,9 +14,16 @@ gem 'bootstrap'
 gem 'chart-js-rails'
 gem 'devise'
 gem 'jquery-rails'
-gem 'rubocop', '~> 0.60.0', require: false
 gem 'slim-rails'
 # -----------
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.8'
+end
+
+group :development do
+  gem 'rubocop', '~> 0.60.0'
+end
 
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'

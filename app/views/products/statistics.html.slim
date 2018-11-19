@@ -1,13 +1,5 @@
 = stylesheet_link_tag 'statistics'
 
-- total = 0
-- categories_total = Hash.new
-- @categories.each do |category|
-  - categories_total[category.name] = 0
-- @products.each do |product|
-  - total += product.price * product.quantity
-  - categories_total[product.category] += product.price * product.quantity
-
 .card-body.bg-light 
   .row
     .col-md-2
@@ -21,13 +13,11 @@
       br
       br
     #total
-      = 'Total: ' + ("%.2f" % [total])
+      = 'Total: ' + ("%.2f" % [@products.total_price])
     #total_category
-      - categories_total.each do |key, value|
+      - @products.total_price_by_category.each do |key, value|
         div
           = key + ": "+("%.2f" % [value])
-
-
 
 = content_tag "div", "", id: 'categories', data: { categories: @categories }
 = content_tag "canvas", "", id: 'myChart', data: { products: @products }
