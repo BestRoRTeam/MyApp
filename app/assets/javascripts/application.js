@@ -18,3 +18,11 @@
 //= require popper
 //= require bootstrap
 //= require Chart.min
+
+function comment(id){
+  var answer = prompt('Add a comment:');
+  if (answer != null) {
+    $('#comment'+id+' #comment_text').val(answer);
+    $('#comment'+id).submit();
+  }
+}

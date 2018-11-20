@@ -24,10 +24,17 @@
           - product.values.each do |x|
             td = x
           td
-           =link_to "Edit", edit_product_path(product), 
-                            :style =>"margin: 10px",
-                            class: 'btn btn-outline-info'
-           =link_to "Delete", product_path(product),
-                              method: :delete, data:{confirm: 'Are you sure?'},
-                              :style =>"margin: 10px", class: 'btn btn-outline-danger'
-    .col-md-2
+            = form_for :comment, :html => { :id => 'comment'+product.id.to_s }, url: comments_path do |f|
+              = f.hidden_field :id, :value => product.id.to_s
+              = f.hidden_field :text, :value => product.read_comment
+              = f.button 'Comment', :style => 'margin: 10px',
+                                    class: 'btn btn-outline-info',
+                                    :onclick => 'comment('+product.id.to_s+');',
+                                    :title => product.read_comment
+              =link_to "Edit", edit_product_path(product), 
+                                  :style =>"margin: 10px",
+                                  class: 'btn btn-outline-info'
+              =link_to "Delete", product_path(product),
+                                  method: :delete, data:{confirm: 'Are you sure?'},
+                                  :style =>"margin: 10px", class: 'btn btn-outline-danger'
+.col-md-2
