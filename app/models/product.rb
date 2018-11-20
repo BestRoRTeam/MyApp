@@ -13,6 +13,15 @@ class Product < ApplicationRecord
     vals
   end
 
+  def read_comment
+    comment = Comment.where(product_id: id)
+    if comment[0]
+      comment[0].content
+    else
+      ''
+    end
+  end
+
   def self.categories_names
     names = []
     all.column_names[1..-3].each do |name|

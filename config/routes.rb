@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get 'products/statistics' => 'products#statistics'
       resources :products
       resources :categories
+      resources :comments, except: %i[new edit update show destroy index]
     end
 
     unauthenticated do
