@@ -12,6 +12,7 @@ gem 'rails', '~> 5.2.1'
 gem 'activeadmin'
 gem 'bootstrap'
 gem 'chart-js-rails'
+gem 'delayed_job_active_record'
 gem 'devise'
 gem 'jquery-rails'
 gem 'slim-rails'
@@ -27,6 +28,7 @@ group :development do
   gem 'rubocop', '~> 0.60.0'
 end
 
+gem 'daemons'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server

@@ -1,0 +1,34 @@
+.card-body.bg-light
+  h1 Adding recurring expense
+  form
+  = form_for :schedule, url: schedules_path do |f| 
+    .form-group
+      = label :period,'Period'
+      = select_tag :period, options_for_select(ProductProvider.dates[0..-2].unshift("Day"), @period),
+                            class: 'form-control'
+    .form-group
+      = f.label :date,'Date'
+      br
+      = f.text_field :date, class: 'form-control', placeholder: 'rrrr-mm-dd'
+    .form-group
+      = f.label :name,'Name'
+      br
+      = f.text_field :name, class: 'form-control', placeholder: 'Name'
+    .form-group
+      = f.label :shop,'Shop'
+      br
+      = f.text_field :shop, class: 'form-control', placeholder: 'Shop'
+    .form-group
+      = f.label :category,'Category'
+      br
+      = select_tag :category, options_for_select(@choices, @choice), class: 'form-control'
+    .form-group
+      = f.label :price,'Price'
+      br
+      = f.text_field :price, class: 'form-control', placeholder: 'Price'
+    .form-group
+      = f.label :quantity,'Quantity'
+      br
+      = f.text_field :quantity, class: 'form-control', placeholder: 'Quantity'
+    br
+    = f.submit "Save Product", :style =>"width: 300px", class: 'btn btn-lg btn-primary btn-block'
