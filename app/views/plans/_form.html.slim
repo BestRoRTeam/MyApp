@@ -1,0 +1,47 @@
+.container
+  .col
+    .card-body.bg-light 
+      -if !@plans
+        h1 Edit plan
+        form
+        = form_for @plan do |f|
+          .form-group
+              = f.label :title,'Title'
+              br
+              = f.text_field :title, class: 'form-control', placeholder: 'Title'
+          .form-group
+              = f.label :since_date,'Since'
+              br
+              = f.date_field :since_date, class: 'form-control'
+          .form-group
+              = f.label :to_date,'To'
+              br
+              = f.date_field :to_date, class: 'form-control'
+          .form-group
+              = f.label :goal,'Goal'
+              br
+              = f.text_field :goal, class: 'form-control', placeholder: '0.00'
+          br
+          = f.submit "Save Plan", class: 'btn btn-lg btn-primary btn-block'
+      -else
+        h1 Plans
+        form
+        = form_for :plan, url: plans_path do |f|
+          .form-group
+              = f.label :title,'Title'
+              br
+              = f.text_field :title, class: 'form-control', placeholder: 'Title'
+          .form-group
+              = f.label :since_date,'Since'
+              br
+              = f.date_field :since_date, class: 'form-control'
+          .form-group
+              = f.label :to_date,'To'
+              br
+              = f.date_field :to_date, class: 'form-control'
+          .form-group
+              = f.label :goal,'Goal'
+              br
+              = f.text_field :goal, class: 'form-control', placeholder: '0.00'
+          br
+          = f.submit "Add Plan", class: 'btn btn-lg btn-primary btn-block'
