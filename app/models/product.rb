@@ -38,7 +38,7 @@ class Product < ApplicationRecord
     job = Delayed::Job.find(job_id)
     job.delete if job.payload_object.args[1] == u_id
   end
-
+  
   def self.categories_names
     names = []
     all.column_names[1..-3].each do |name|
