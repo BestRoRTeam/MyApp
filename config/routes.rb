@@ -12,6 +12,11 @@ Rails.application.routes.draw do
       get 'products/statistics' => 'products#statistics'
       resources :products
       resources :categories
+
+      get 'schedules/recurring_expenses' => 'schedules#recurring_expenses'
+      get 'schedules/list' => 'schedules#list'
+      resources :schedules
+
       resources :comments, except: %i[new edit update show destroy index]
     end
 
