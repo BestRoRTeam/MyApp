@@ -1,0 +1,30 @@
+  render = render partial: "form"
+  br
+  .card-body.bg-light 
+    .row
+      .col-md-3
+      #table-responsive.col-6
+        table.table.table-light
+          thead
+            tr
+              th Title
+              th Since
+              th To
+              th Goal
+              th Spent
+              th Options
+          tbody
+          - @plans.reverse.each do |plan|
+            tr
+              td = plan.title
+              td = plan.since_date
+              td = plan.to_date
+              td = ("%.2f" % [plan.goal])
+              td style="color: #{plan.color};" = ("%.2f" % [plan.status])
+              td
+                =link_to "Edit", edit_plan_path(plan), 
+                                  :style =>"margin: 10px",
+                                  class: 'btn btn-outline-info'
+                =link_to "Delete", plan_path(plan),
+                                    method: :delete, data:{confirm: 'Are you sure?'},
+                                    :style =>"margin: 10px", class: 'btn btn-outline-danger'

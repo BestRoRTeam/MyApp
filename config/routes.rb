@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get 'products/statistics' => 'products#statistics'
       resources :products
       resources :categories
+      resources :plans
 
       get 'schedules/recurring_expenses' => 'schedules#recurring_expenses'
       get 'schedules/list' => 'schedules#list'
