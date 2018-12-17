@@ -16,6 +16,9 @@ gem 'delayed_job_active_record'
 gem 'devise'
 gem 'jquery-rails'
 gem 'slim-rails'
+gem 'active_model_serializers'
+gem 'pg_search'
+gem 'jquery-ui-rails'
 # -----------
 
 group :development, :test do

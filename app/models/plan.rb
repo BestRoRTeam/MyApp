@@ -8,7 +8,7 @@ class Plan < ApplicationRecord
     return @result if @result
 
     products = Product.where(user_id: user_id).order('created_at')
-    products = products.where('created_at > ?', since_date).where('created_at < ?', to_date)
+    products = products.where('created_at > ?', since_date.beginning_of_day).where('created_at < ?', to_date.end_of_day)
 
     @result = 0
     products.each do |product|

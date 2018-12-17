@@ -18,6 +18,51 @@
 //= require popper
 //= require bootstrap
 //= require Chart.min
+//= require jquery-ui
+
+$(document).ready(function() {
+  var tableContent = $('#products').html();
+
+  $('.main-search').keyup(debounce(function() {
+    let testInput = $(this).val()
+
+    $.get('/api/search', {key: testInput}, function(result) {
+      let tags = [];
+      for(let i in result)
+        tags.push(result[i].name);
+      $('#search').autocomplete({source: tags});
+
+      $('#products').empty().append(tableContent);
+      $('#products tr').each(function() {
+        let exists = false;
+        for (let i in result) {
+          if($(this).attr('id') == result[i].id) {
+            exists = true;
+            break;
+          }
+        }
+        if(!exists) {
+          $(this).remove();
+        }
+      });
+    })
+  },300));
+});
+
+function debounce(func, wait, immediate) {
+  var timeout;
+  return function() {
+    var context = this, args = arguments;
+    var later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+};
 
 function comment(id){
   var answer = prompt('Add a comment:');
