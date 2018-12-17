@@ -1,4 +1,5 @@
 class ProductProvider
+  
   class << self
     def dates
       %w[Week Month Year All]
@@ -28,4 +29,5 @@ class ProductProvider
       end
     end
   end
+
 end

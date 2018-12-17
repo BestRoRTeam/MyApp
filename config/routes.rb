@@ -13,6 +13,9 @@ Rails.application.routes.draw do
       resources :products
       resources :categories
       resources :plans
+      namespace :api do
+        resources :search, only: [:index]
+      end
 
       get 'schedules/recurring_expenses' => 'schedules#recurring_expenses'
       get 'schedules/list' => 'schedules#list'

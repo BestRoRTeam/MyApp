@@ -3,6 +3,8 @@
     .col-md-2
     #table-responsive.col-8
       h1 Your products
+      .form-inline.my-2.my-lg-0.search-form.float-right
+       input.main-search.form-control.mr-sm-2#search type="search" placeholder="Search" aria-label="Search"
       p
        = 'Money spent: ' + ("%.2f" % [@products.total_price])
       
@@ -18,23 +20,23 @@
           - @products.categories_names.each do |x|
             th = x
           th Options
-        tbody
-        - @products.reverse.each do |product|
-          tr
-          - product.values.each do |x|
-            td = x
-          td
-            = form_for :comment, :html => { :id => 'comment'+product.id.to_s }, url: comments_path do |f|
-              = f.hidden_field :id, :value => product.id.to_s
-              = f.hidden_field :text, :value => product.read_comment
-              = f.button 'Comment', :style => 'margin: 10px',
-                                    class: 'btn btn-outline-info',
-                                    :onclick => 'comment('+product.id.to_s+');',
-                                    :title => product.read_comment
-              =link_to "Edit", edit_product_path(product), 
-                                  :style =>"margin: 10px",
-                                  class: 'btn btn-outline-info'
-              =link_to "Delete", product_path(product),
-                                  method: :delete, data:{confirm: 'Are you sure?'},
-                                  :style =>"margin: 10px", class: 'btn btn-outline-danger'
+        tbody#products
+          - @products.reverse.each do |product|
+            tr id=product.id
+              - product.values.each do |x|
+                td = x
+              td
+                = form_for :comment, :html => { :id => 'comment'+product.id.to_s }, url: comments_path do |f|
+                  = f.hidden_field :id, :value => product.id.to_s
+                  = f.hidden_field :text, :value => product.read_comment
+                  = f.button 'Comment', :style => 'margin: 10px',
+                                        class: 'btn btn-outline-info',
+                                        :onclick => 'comment('+product.id.to_s+');',
+                                        :title => product.read_comment
+                  =link_to "Edit", edit_product_path(product), 
+                                      :style =>"margin: 10px",
+                                      class: 'btn btn-outline-info'
+                  =link_to "Delete", product_path(product),
+                                      method: :delete, data:{confirm: 'Are you sure?'},
+                                      :style =>"margin: 10px", class: 'btn btn-outline-danger'
 .col-md-2

@@ -5,6 +5,12 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :quantity, presence: true, numericality: { other_than: 0 }
 
+  include PgSearch
+  pg_search_scope :search, against: :name,
+                           using: {
+                             tsearch: { prefix: true, dictionary: 'english' }
+                           }
+
   def values
     vals = []
     attributes.values[1..-3].each do |x|
