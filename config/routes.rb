@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       resources :products
       resources :categories
       resources :plans
+      resources :temp_products
+      post 'temp_products/submit' => 'temp_products#submit'
       namespace :api do
         resources :search, only: [:index]
       end

@@ -1,0 +1,45 @@
+render = render partial: "form"
+br
+.card-body.bg-light 
+  .row
+    .col-md-3
+    #table-responsive.col-6
+      table.table.table-light
+        thead
+          tr
+            th
+            th
+            th Name
+            th Category
+            th Quantity
+            th
+        tbody
+          - @temp_products.reverse.each do |temp|
+            tr
+              td
+              td 
+                input.form-check-input.temp-check id="check#{temp.id}" type="checkbox"
+              td = temp.name
+              td = temp.category
+              td = temp.quantity
+              td
+                =link_to "Edit", edit_temp_product_path(temp), 
+                                  :style =>"margin: 10px",
+                                  class: 'btn btn-outline-info'
+                =link_to "Delete", temp_product_path(temp),
+                                    method: :delete, data:{confirm: 'Are you sure?'},
+                                    :style =>"margin: 10px", class: 'btn btn-outline-danger'
+            td colspan="6" id="form#{temp.id}" style="display: none"
+              input.form-control id="input_price#{temp.id}" placeholder=("Price")
+          tr
+            td colspan="6"
+              center
+                form
+                = form_for :temp_products_json, url: temp_products_submit_path do |f|
+                  .form-group
+                    = f.hidden_field :json_data, :value => TempProductProvider.get_json(current_user.id), :id => 'json_data_input'
+                    = f.label :shop, 'Shop name'
+                    br
+                    input.form-control id="input_shop" placeholder=("Tesco")
+                  br
+                  = f.submit "Add to products", class: 'btn btn-lg btn-primary btn-block', id: 'temp_submit'
