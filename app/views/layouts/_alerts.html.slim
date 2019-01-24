@@ -1,4 +1,13 @@
-p.notice
-  = notice
-p.alert
-  = alert
+- if notice
+  .alert.alert-warning
+    a.close aria-label='close' data-dismiss='alert' href='#'  × 
+    = notice
+- if alert
+  .alert.alert-warning
+    a.close aria-label='close' data-dismiss='alert' href='#'  ×
+    = alert
+
+- @reports.each do |r|
+  .alert.alert-info
+    a.close aria-label='close' data-dismiss='alert' href='#' onclick='$.ajax({url: "/delete_report", method: "delete", data: {id:#{r.id}}});'  ×
+    = r.msg

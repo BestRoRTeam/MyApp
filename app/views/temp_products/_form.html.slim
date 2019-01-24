@@ -1,0 +1,41 @@
+.container
+  .col
+    .card-body.bg-light
+      -if !@temp_products
+        h1 Edit Product from Shopping List
+        form
+        = form_for @temp_product do |f|
+          br
+          .form-group
+            = f.label :name,'Name'
+            br
+            = f.text_field :name, class: 'form-control', placeholder: 'Bread'
+          .form-group
+            = f.label :category,'Category'
+            br
+            = select_tag :category, options_for_select(@choices, @choice), class: 'form-control'
+          .form-group
+            = f.label :quantity,'Quantity'
+            br
+            = f.text_field :quantity, class: 'form-control', placeholder: '2'
+          br
+          = f.submit "Edit Product", class: 'btn btn-lg btn-primary btn-block'
+      -else
+        h1 Shopping List
+        form
+        = form_for :temp_product, url: temp_products_path do |f|
+          br
+          .form-group
+            = f.label :name,'Name'
+            br
+            = f.text_field :name, class: 'form-control', placeholder: 'Bread'
+          .form-group
+            = f.label :category,'Category'
+            br
+            = select_tag :category, options_for_select(@choices, @choice), class: 'form-control'
+          .form-group
+            = f.label :quantity,'Quantity'
+            br
+            = f.text_field :quantity, class: 'form-control', placeholder: '2'
+          br
+          = f.submit "Add Product", class: 'btn btn-lg btn-primary btn-block'
