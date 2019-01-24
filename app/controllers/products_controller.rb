@@ -1,8 +1,9 @@
-# frozen_string_literal: true
-
 require_relative '../providers/product_provider.rb'
+require_relative '../providers/report_provider.rb'
 
 class ProductsController < ApplicationController
+  before_action :select_categories
+
   def index
     @period = (params[:period] || ProductProvider.dates[0])
     @products = Product.where(user_id: current_user.id).order('created_at')
@@ -16,13 +17,7 @@ class ProductsController < ApplicationController
     @products = @products.where('created_at > ?', ProductProvider.date_selector(@period)) if @period != 'All'
   end
 
-  def new
-    @choices = []
-    Category.where(user_id: current_user.id).each do |c|
-      @choices.push(c.name)
-    end
-    @choice = @choices.first
-  end
+  def new; end
 
   def create
     @product = Product.new(product_params)
@@ -30,6 +25,7 @@ class ProductsController < ApplicationController
     @product.user_id = current_user.id
 
     if @product.save
+      ReportProvider.check_plans(current_user.id)
       flash[:notice] = 'Product added'
       redirect_to action: 'index'
     else
@@ -40,10 +36,6 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.where(user_id: current_user.id).find(params[:id])
-    @choices = []
-    Category.where(user_id: current_user.id).each do |c|
-      @choices.push(c.name)
-    end
     @choice = @product.category
   end
 
@@ -51,6 +43,7 @@ class ProductsController < ApplicationController
     @product = Product.where(user_id: current_user.id).find(params[:id])
     @product.category = params[:category]
     if @product.update(product_params)
+      ReportProvider.check_plans(current_user.id)
       flash[:notice] = 'Product updated'
       redirect_to action: 'index'
     else
@@ -69,5 +62,13 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :shop, :category, :price, :quantity)
+  end
+
+  def select_categories
+    @choices = []
+    Category.where(user_id: current_user.id).each do |c|
+      @choices.push(c.name)
+    end
+    @choice = @choices.first
   end
 end

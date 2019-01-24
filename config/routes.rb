@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 
 Rails.application.routes.draw do
   resources :tip_of_the_days
@@ -22,6 +21,8 @@ Rails.application.routes.draw do
       get 'schedules/recurring_expenses' => 'schedules#recurring_expenses'
       get 'schedules/list' => 'schedules#list'
       resources :schedules
+
+      delete 'delete_report' => 'pages#delete_report'
 
       resources :comments, except: %i[new edit update show destroy index]
     end
