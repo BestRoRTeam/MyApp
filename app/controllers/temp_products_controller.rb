@@ -28,6 +28,7 @@ class TempProductsController < ApplicationController
       else
         flash[:notice] = 'Product(s) adding failed'
         redirect_to action: 'index'
+        return
       end
 
       temp_product = TempProduct.where(user_id: current_user.id).find(temp_id.to_i)
