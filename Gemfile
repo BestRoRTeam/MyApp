@@ -9,16 +9,16 @@ ruby '2.5.1'
 gem 'rails', '~> 5.2.1'
 
 # Custom gems
+gem 'active_model_serializers'
 gem 'activeadmin'
 gem 'bootstrap'
 gem 'chart-js-rails'
 gem 'delayed_job_active_record'
 gem 'devise'
 gem 'jquery-rails'
-gem 'slim-rails'
-gem 'active_model_serializers'
-gem 'pg_search'
 gem 'jquery-ui-rails'
+gem 'pg_search'
+gem 'slim-rails'
 # -----------
 
 group :development, :test do
